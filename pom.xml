@@ -47,6 +47,11 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -87,8 +92,7 @@
                         <configuration>
                             <executable>npm</executable>
                             <arguments>
-                                <argument>run</argument>
-                                <argument>build</argument>
+                                <argument>install</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -102,7 +106,7 @@
                             <executable>npm</executable>
                             <arguments>
                                 <argument>run</argument>
-                                <unit>test:unit</unit>
+                                <arguemnt>test:unit</arguemnt>
                             </arguments>
                         </configuration>
                     </execution>
@@ -121,7 +125,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>front end e2e test</id>
+                        <id>front-end e2e test</id>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -134,7 +138,6 @@
                             </arguments>
                         </configuration>
                     </execution>
-
                 </executions>
                 <configuration>
                     <workingDirectory>${basedir}/front-end</workingDirectory>
@@ -145,7 +148,7 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>copy freon-end template</id>
+                        <id>copy front-end template</id>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -155,7 +158,7 @@
                             <resources>
                                 <resource>
                                     <directory>front-end/dist</directory>
-                                    <includes>index.html</includes>
+                                    <includes><include>index.html</include></includes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -171,9 +174,7 @@
                             <resources>
                                 <resource>
                                     <directory>front-end/dist</directory>
-                                    <excludes>
-                                        <exclude>index.html</exclude>
-                                    </excludes>
+                                    <excludes><exclude>index.html</exclude></excludes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -185,31 +186,27 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes/templates</outputDirectory>
+                            <outputDirectory>${basedir}}/target/classes/templates</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>front-end/dist</directory>
-                                    <excludes>
-                                        <exclude>index.html</exclude>
-                                    </excludes>
+                                    <excludes><exclude>index.html</exclude></excludes>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy front-end static assets to target</id>
+                        <id>copy front-end assets to target</id>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes/static</outputDirectory>
+                            <outputDirectory>${basedir}}/target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>front-end/dist</directory>
-                                    <excludes>
-                                        <exclude>index.html</exclude>
-                                    </excludes>
+                                    <excludes><exclude>index.html</exclude></excludes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -222,13 +219,10 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${basedir}/src/main/resources/static/static</directory>
+                            <directory>${basedir}/src/main/resources/static</directory>
                         </fileset>
                         <fileset>
                             <directory>${basedir}/src/main/resources/templates</directory>
-                            <includes>
-                                <include>index.html</include>
-                            </includes>
                         </fileset>
                     </filesets>
                 </configuration>
